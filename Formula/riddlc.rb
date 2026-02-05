@@ -5,11 +5,11 @@
 class Riddlc < Formula
   desc "Compiler for RIDDL (Reactive Interface to Domain Definition Language)"
   homepage "https://github.com/ossuminc/riddl"
-  version "1.2.3"
+  version "1.3.0"
   license "Apache-2.0"
 
   url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
-  sha256 "63d44afe96a053c9838ed23fb7c7255d4d5370bfbbcf6c58740ae6a01a4081e9"
+  sha256 "78c25079a6ec5c6320eb7c455cfac921675bf751c89749b17927e911671536f8"
 
   depends_on "openjdk@21"
 
