@@ -5,20 +5,23 @@
 class Riddlc < Formula
   desc "Compiler for RIDDL (Reactive Interface to Domain Definition Language)"
   homepage "https://github.com/ossuminc/riddl"
-  version "1.4.0"
+  version "1.8.0"
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
-    sha256 "f059ab7b2236d99584526297cf9a8f6b662ee0f0b55214b1402976095c6fa229"
+    sha256 "b70e2fbb33c4b6b769b0071bff283e03a43cbe7518877bd0f63167ef2cb6d0b6"
+  elsif OS.linux? && Hardware::CPU.intel?
+    url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
+    sha256 "903920b3afa31dfbaa65746bb4615b95a191292280777cabaa88b231241f9f30"
   else
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
-    sha256 "a35c1ca98cf0105fcd2e7016f3b4e17e3d7489c75b68d9e0010e21ab349cb9b4"
+    sha256 "b3f9eef8b1dfb2d5c311d73036a74cef062ca10087c257cc906c610115f36e05"
     depends_on "openjdk@21"
   end
 
   def install
-    if OS.mac? && Hardware::CPU.arm?
+    if (OS.mac? && Hardware::CPU.arm?) || (OS.linux? && Hardware::CPU.intel?)
       # Native binary - just install directly
       bin.install "bin/riddlc"
     else
@@ -36,7 +39,7 @@ class Riddlc < Formula
   end
 
   def caveats
-    if OS.mac? && Hardware::CPU.arm?
+    if (OS.mac? && Hardware::CPU.arm?) || (OS.linux? && Hardware::CPU.intel?)
       <<~EOS
         riddlc is installed as a native binary. No JDK required.
 

@@ -27,8 +27,8 @@ brew install riddlc
 #### Usage
 
 ```bash
-# Check version
-riddlc version
+# Check version, license, build date, etc. 
+riddlc info
 
 # Get help
 riddlc help
@@ -42,14 +42,17 @@ riddlc validate myfile.riddl
 
 #### Requirements
 
-- macOS (Intel or Apple Silicon)
-- Java 21 (automatically installed via `openjdk@21` dependency)
+- **macOS Apple Silicon** or **Linux x86_64**: Native binary, no
+  JDK required
+- **Other platforms**: Java 21 (automatically installed via
+  `openjdk@21` dependency)
 
 ## More Information
 
 - [RIDDL Documentation](https://ossum.tech/riddl/)
 - [RIDDL GitHub Repository](https://github.com/ossuminc/riddl)
 - [Ossum Inc](https://ossuminc.com)
+- [Ossum AI](https://ossum.ai)
 
 ## License
 
