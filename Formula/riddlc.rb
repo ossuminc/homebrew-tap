@@ -22,8 +22,8 @@ class Riddlc < Formula
 
   def install
     if (OS.mac? && Hardware::CPU.arm?) || (OS.linux? && Hardware::CPU.intel?)
-      # Native binary - just install directly
-      bin.install "bin/riddlc"
+      # Native binary - Homebrew strips the single top-level "bin/" dir
+      bin.install "riddlc"
     else
       # JVM version - needs wrapper script
       rm "bin/riddlc.bat"
