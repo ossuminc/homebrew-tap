@@ -34,7 +34,7 @@ class Riddlc < Formula
       (bin/"riddlc").write <<~EOS
         #!/bin/bash
         export JAVA_HOME="#{Formula["openjdk@21"].opt_prefix}"
-        exec "#{libexec}/bin/riddlc" ""
+        exec "#{libexec}/bin/riddlc" "$@"
       EOS
     end
   end
