@@ -26,7 +26,7 @@ jobs:
         SHA_LINUX_X86: ${{ steps.payload.outputs.sha_linux_x86 }}
         SHA_JVM: ${{ steps.payload.outputs.sha_jvm }}
       run: |
-        cat > Formula/riddlc.rb << FORMULA
+        envsubst '$TAG $SHA_MACOS_ARM64 $SHA_LINUX_X86 $SHA_JVM' > Formula/riddlc.rb << 'FORMULA'
         # Homebrew formula for riddlc - the RIDDL compiler
         # To install: brew install ossuminc/tap/riddlc
         # Or add the tap first: brew tap ossuminc/tap && brew install riddlc
