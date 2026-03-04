@@ -47,6 +47,41 @@ riddlc validate myfile.riddl
 - **Other platforms**: Java 21 (automatically installed via
   `openjdk@21` dependency)
 
+### riddl-gen-cli
+
+Document generators for RIDDL models. Generates AsciiDoc,
+Hugo, OpenAPI, and Smithy specifications from RIDDL models.
+
+```bash
+brew install ossuminc/tap/riddl-gen-cli
+```
+
+Or after tapping:
+
+```bash
+brew install riddl-gen-cli
+```
+
+#### Usage
+
+```bash
+# Get help
+riddl-gen-cli --help
+
+# Generate documentation from a RIDDL model
+riddl-gen-cli generate --help
+
+# Check job status
+riddl-gen-cli status --job-id <id>
+```
+
+#### Requirements
+
+- **macOS Apple Silicon** or **Linux x86_64**: Native binary, no
+  JDK required
+- **Other platforms**: Java 25 (automatically installed via
+  `openjdk@25` dependency)
+
 ## More Information
 
 - [RIDDL Documentation](https://ossum.tech/riddl/)
