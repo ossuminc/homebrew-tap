@@ -6,18 +6,18 @@
 class Riddlc < Formula
   desc "Compiler for RIDDL (Reactive Interface to Domain Definition Language)"
   homepage "https://github.com/ossuminc/riddl"
-  version "1.16.0"
+  version "1.16.1"
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
-    sha256 "7099d08000a87fb9aa85bab325a557193eeefc7bf8cb804f62fc016fcb528129"
+    sha256 "f7037d9bca7209388f1320d649e8b470dab464a3c39e2282d2dc6eeb4ca61c87"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
-    sha256 "ba921459e741f20a5c979e4439bece9e76554c86e6687263806aad7caa3a629d"
+    sha256 "e7c866bb84d5fb0ce817f1e2acbdf596164e718f629c338a7d8e716835699473"
   else
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
-    sha256 "5a266d7e3124c3d034ffb0a1b8e94e4cd3144b1b98aea8c68715d48bdac3eb09"
+    sha256 "bf37c7f8d42b3a808fdf944a599ee6d640198e99796a0bc284f077f7c0062ef0"
     depends_on "openjdk@21"
   end
 
