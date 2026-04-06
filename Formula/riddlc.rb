@@ -11,13 +11,13 @@ class Riddlc < Formula
 
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
-    sha256 "f0c6e4e4e34244ccb551518d3e92ccc71f2827907c1c4321a95f1df09bd2815e"
+    sha256 "e04c447545a9ec9ea837270e6a8ae461a679754a91ef7f93b9ffb236063672a9"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
-    sha256 "735d89a471abd105e89138f405f77d2d4eb51e4753aa0471b61dfd41e43d4f24"
+    sha256 "df03a91e1b5a02187d7fc16419ea2db93e56c5a627b9d68eb2fb5fd3adef68ca"
   else
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
-    sha256 "082cb322d640249dcc00a17f1cd0e2f4b6998422f9da06e441f7e8263e12069f"
+    sha256 "bddd8336cf3e6e7175cffcf6796952ac2b1d8f342000026725df3f3a120712ca"
     depends_on "openjdk@21"
   end
 
