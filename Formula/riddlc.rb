@@ -12,9 +12,11 @@ class Riddlc < Formula
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
     sha256 "cf276a2079ac6728a2b29d5ed149c4bc8ab788825a12194d6744e4e73d726cd3"
+    depends_on "libidn2"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
     sha256 "6c214dd03249259f8dea5f0842dd739c01842c5fe72d23d821ea0f30c9f260a4"
+    depends_on "libidn2"
   else
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
     sha256 "a50cf29e2579ed08ba1f90ce498fe615ee821eb8d3f111a5556e9553d66f0da8"

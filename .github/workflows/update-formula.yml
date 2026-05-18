@@ -41,9 +41,11 @@ jobs:
           if OS.mac? && Hardware::CPU.arm?
             url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
             sha256 "${SHA_MACOS_ARM64}"
+            depends_on "libidn2"
           elsif OS.linux? && Hardware::CPU.intel?
             url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
             sha256 "${SHA_LINUX_X86}"
+            depends_on "libidn2"
           else
             url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
             sha256 "${SHA_JVM}"
