@@ -44,12 +44,12 @@ jobs:
 
           # Native binary + a vendored libllama (in lib/, found via @rpath/$ORIGIN).
           if OS.mac? && Hardware::CPU.arm?
-            url "https://github.com/ossuminc/riddl-generator/releases/download/#{version}/riddlg-#{version}-Darwin-arm64.tar.gz"
+            url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Darwin-arm64.tar.gz"
             sha256 "${SHA_MACOS_ARM64}"
             depends_on "libidn2"
             depends_on "openssl@3"
           elsif OS.linux? && Hardware::CPU.intel?
-            url "https://github.com/ossuminc/riddl-generator/releases/download/#{version}/riddlg-#{version}-Linux-x86_64.tar.gz"
+            url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Linux-x86_64.tar.gz"
             sha256 "${SHA_LINUX_X86}"
             depends_on "libidn2"
             depends_on "openssl@3"

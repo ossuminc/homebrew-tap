@@ -12,12 +12,12 @@ class Riddlg < Formula
 
   # Native binary + a vendored libllama (in lib/, found via @rpath/$ORIGIN).
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/ossuminc/riddl-generator/releases/download/#{version}/riddlg-#{version}-Darwin-arm64.tar.gz"
+    url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Darwin-arm64.tar.gz"
     sha256 "c5fec5a84da920b91b88af75f0c66bc795034034285c9fc84ae819c683e44439"
     depends_on "libidn2"
     depends_on "openssl@3"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/ossuminc/riddl-generator/releases/download/#{version}/riddlg-#{version}-Linux-x86_64.tar.gz"
+    url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Linux-x86_64.tar.gz"
     sha256 "f844184facb75e33e20330e69dabcd36ebc3eb534560442cf20595348bb3f0af"
     depends_on "libidn2"
     depends_on "openssl@3"
