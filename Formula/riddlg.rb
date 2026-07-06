@@ -26,10 +26,13 @@ class Riddlg < Formula
   end
 
   def install
-    # Keep bin/ and lib/ siblings so the binary's @executable_path/../lib (and
-    # $ORIGIN/../lib on Linux) rpath finds the vendored libllama.
-    prefix.install "bin"
-    prefix.install "lib"
+    # Vendored libllama/ggml are private to riddlg (found via the binary's
+    # @executable_path/../lib rpath, and $ORIGIN/../lib on Linux). Install them
+    # under libexec so Homebrew does NOT symlink them into HOMEBREW_PREFIX/lib
+    # and collide with the ggml / llama.cpp formulae; only the binary goes on
+    # the PATH. bin and lib stay siblings in libexec, so the rpath still works.
+    libexec.install "bin", "lib"
+    bin.install_symlink libexec/"bin/riddlg"
   end
 
   def caveats
