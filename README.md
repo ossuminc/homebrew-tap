@@ -71,7 +71,7 @@ brew install riddlg
 riddlg info
 
 # Get help
-riddlg help
+riddlg --help
 
 # Validate a RIDDL file
 riddlg validate myfile.riddl
