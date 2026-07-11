@@ -6,7 +6,7 @@
 
 class Riddlg < Formula
   desc "Local RIDDL validation, docs/API generation, and AI code generation"
-  homepage "https://github.com/ossuminc/riddl-generator"
+  homepage "https://ossum.tech/riddl/tools/riddlg/"
   version "0.3.0"
   license :cannot_represent # proprietary; not open source
 
