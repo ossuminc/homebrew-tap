@@ -7,18 +7,18 @@
 class Riddlg < Formula
   desc "Local RIDDL validation, docs/API generation, and AI code generation"
   homepage "https://ossum.tech/riddl/tools/riddlg/"
-  version "0.3.0"
+  version "0.4.0"
   license :cannot_represent # proprietary; not open source
 
   # Native binary + a vendored libllama (in lib/, found via @rpath/$ORIGIN).
   if OS.mac? && Hardware::CPU.arm?
     url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Darwin-arm64.tar.gz"
-    sha256 "1f2c1d4a606299658d76a2bf87d50c30dbf1fa72848967f8220624a084a1f0c6"
+    sha256 "498d475d5318db2e67be09952ede828cf6b3cc5f22437d7bbea50ba15a4d4564"
     depends_on "libidn2"
     depends_on "openssl@3"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Linux-x86_64.tar.gz"
-    sha256 "10cd729306c5930de70c4a0b3fff3c75a3f937badfa99c85dc201c4d72b7d728"
+    sha256 "24f45bb54619f19cb4a5448d8d6458cc1688f3649fbbc8736d9ecbdea03ba7d8"
     depends_on "libidn2"
     depends_on "openssl@3"
   else
