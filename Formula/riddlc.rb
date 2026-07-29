@@ -53,8 +53,8 @@ class Riddlc < Formula
       <<~EOS
         riddlc is installed as a native binary. No JDK required.
 
-        To verify the installation:
-          riddlc version
+        To verify the installation and see what you got:
+          riddlc info
 
         For help:
           riddlc help
@@ -63,8 +63,8 @@ class Riddlc < Formula
       <<~EOS
         riddlc requires Java 21. This formula uses openjdk@21.
 
-        To verify the installation:
-          riddlc version
+        To verify the installation and see what you got:
+          riddlc info
 
         For help:
           riddlc help
@@ -73,6 +73,8 @@ class Riddlc < Formula
   end
 
   test do
-    assert_match "riddlc version", shell_output("#{bin}/riddlc version")
+    # `riddlc info` proves the binary runs AND that it reports the
+    # version this formula claims to have installed.
+    assert_match version.to_s, shell_output("#{bin}/riddlc info")
   end
 end
