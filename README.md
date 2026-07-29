@@ -47,6 +47,39 @@ riddlc validate myfile.riddl
 - **Other platforms**: Java 21 (automatically installed via
   `openjdk@21` dependency)
 
+### riddlc@rc
+
+Release candidates of `riddlc`, for trying a release before it
+ships. Opt in by name — nothing installs an RC unless you ask
+for it by this name:
+
+```bash
+brew install ossuminc/tap/riddlc@rc
+```
+
+An RC installs `riddlc` onto your PATH exactly as the stable
+formula does, so the two **cannot be installed at the same
+time**. Homebrew will tell you if the other one is present:
+
+```bash
+brew uninstall riddlc && brew install ossuminc/tap/riddlc@rc
+```
+
+To go back to the stable release:
+
+```bash
+brew uninstall riddlc@rc && brew install ossuminc/tap/riddlc
+```
+
+`brew upgrade` tracks the two independently, so an RC install
+keeps getting RCs and never silently jumps to a stable release.
+Usage and requirements are identical to `riddlc` above; check
+what you have with `riddlc info`.
+
+Between release candidates this formula may point at the latest
+stable release. It is updated automatically when riddl publishes
+a GitHub prerelease.
+
 ### riddlg
 
 The RIDDL generator - validates RIDDL models and generates
