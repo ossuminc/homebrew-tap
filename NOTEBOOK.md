@@ -97,11 +97,15 @@ than mutating the real one.
 
 ### Unfinished
 
-- **The dispatch is unproven end to end.** `HOMEBREW_TAP_SECRET`
-  **does not exist on the synapify repo** (it has `APPLE_*`,
-  `CSC_*`, `GCP_*`, `BLOG_DISPATCH` only). Until Reid adds that PAT,
-  the dispatch 404s and the cask stays where it is. This is the one
-  manual prerequisite.
+- **The dispatch is unproven end to end**, though no longer blocked:
+  Reid added `HOMEBREW_TAP_SECRET` to the synapify repo during this
+  session (2026-07-30 21:57Z). What remains is the sending job
+  itself, below. Confirm on the first release after that lands.
+- **The riddlc-rc dispatch proved itself mid-session.** The previous
+  entry listed "the first real dispatch is unproven" as unfinished;
+  `0fa6389` (riddlc-rc → 2.0.0-rc.2) arrived on the remote while
+  this work was in progress, touching only `Formula/riddlc-rc.rb`.
+  The RC routing works.
 - **The synapify half is a task handoff**, not done here:
   `synapify/task/2026-07-30-homebrew-cask-dispatch.md`. Its
   `update-homebrew` job must `needs: upload-to-gcs`, *not*
