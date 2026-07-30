@@ -127,6 +127,49 @@ reference, and how to use alternative AI models.
 - riddlg is proprietary software (free tier + licensed Pro
   features); the binary download is free
 
+## Available Casks
+
+### synapify
+
+Synapify — the Solution Architect's Workbench. A visual RIDDL
+editor for designing distributed, reactive, cloud-native systems.
+Unlike the formulae above it is a macOS application, so it
+installs as a cask:
+
+```bash
+brew install --cask ossuminc/tap/synapify
+```
+
+Or after tapping:
+
+```bash
+brew install --cask synapify
+```
+
+#### Requirements
+
+- **macOS Apple Silicon only** — there is no Intel build
+- **macOS 12 (Monterey) or later**
+
+#### Updates
+
+Synapify updates itself. `brew upgrade` deliberately leaves it
+alone, so `brew list --cask --versions synapify` reports the
+version Homebrew installed rather than the version you are
+running — check the app's own About window for that. To force
+Homebrew to reinstall at the cask's version:
+
+```bash
+brew upgrade --cask --greedy synapify
+```
+
+#### Uninstalling
+
+```bash
+brew uninstall --cask synapify           # remove the app
+brew uninstall --zap --cask synapify     # also remove settings, caches, logs
+```
+
 ## More Information
 
 - [RIDDL Documentation](https://ossum.tech/riddl/)
@@ -137,4 +180,6 @@ reference, and how to use alternative AI models.
 ## License
 
 The tap itself and the `riddlc` formula are Apache-2.0. The
-`riddlg` binary it installs is proprietary software of Ossum Inc.
+`riddlg` binary it installs is proprietary software of Ossum Inc.,
+as is the `synapify` application — both are commercial software,
+not open source.
