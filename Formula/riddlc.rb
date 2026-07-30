@@ -9,10 +9,10 @@ class Riddlc < Formula
   version "1.31.0"
   license "Apache-2.0"
 
-  # riddlc and riddlc@rc are mutually exclusive rather than the RC being
+  # riddlc and riddlc-rc are mutually exclusive rather than the RC being
   # keg_only: a release candidate exists to be exercised as `riddlc` on
   # PATH, which a keg_only formula would not be.
-  conflicts_with "riddlc@rc", because: "both install a riddlc binary"
+  conflicts_with "riddlc-rc", because: "both install a riddlc binary"
 
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"

@@ -29,11 +29,11 @@ jobs:
         case "$FORMULA" in
           riddlc)
             CLASS="Riddlc"
-            CONFLICTS="riddlc@rc"
+            CONFLICTS="riddlc-rc"
             DESC="Compiler for RIDDL (Reactive Interface to Domain Definition Language)"
             ;;
-          riddlc@rc)
-            CLASS="RiddlcAtRc"
+          riddlc-rc)
+            CLASS="RiddlcRc"
             CONFLICTS="riddlc"
             DESC="Release candidate of riddlc, the RIDDL compiler"
             ;;
@@ -78,7 +78,7 @@ jobs:
           version "${TAG}"
           license "Apache-2.0"
 
-          # riddlc and riddlc@rc are mutually exclusive rather than the RC being
+          # riddlc and riddlc-rc are mutually exclusive rather than the RC being
           # keg_only: a release candidate exists to be exercised as `riddlc` on
           # PATH, which a keg_only formula would not be.
           conflicts_with "${CONFLICTS}", because: "both install a riddlc binary"
