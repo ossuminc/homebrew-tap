@@ -9,9 +9,22 @@ name: Update synapify Cask
 # update-formula.yml there is no name whitelist to apply here: the output path
 # Casks/synapify.rb is fixed by this workflow, not taken from the payload.
 #
-# Synapify has no beta cask, so a prerelease must not reach this workflow at
-# all. That guard lives on the sending side, as `if: github.event.release
-# .prerelease != true` on synapify's update-homebrew job.
+# Synapify has no RC cask — no counterpart to riddlc-rc — so an RC must not
+# reach this workflow at all, or it would overwrite the stable cask that every
+# `brew install --cask synapify` resolves to. That guard lives entirely on the
+# SENDING side, as a two-part job-level condition on synapify's update-homebrew
+# job (release.yml), which must test both signals:
+#
+#   if: ${{ github.event.release.prerelease != true &&
+#           !contains(github.event.release.tag_name || inputs.tag, '-rc.') }}
+#
+# The prerelease flag alone is not enough: a workflow_dispatch of an RC tag, or
+# a prerelease created without the flag, would still dispatch.
+#
+# This workflow does NOT independently defend against that. The version regex
+# below accepts `1.0.0-rc.1` happily, because it exists to reject malformed and
+# hostile input, not to make a channel decision. If that ever needs to change,
+# it is a deliberate hardening, not a bug fix — see NOTEBOOK.md.
 
 on:
   repository_dispatch:

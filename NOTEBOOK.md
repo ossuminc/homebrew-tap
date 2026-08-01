@@ -111,6 +111,55 @@ than mutating the real one.
   `update-homebrew` job must `needs: upload-to-gcs`, *not*
   `build-platform` — gating on the build alone would let the cask
   name a GCS path before the upload job had put the file there.
+
+### The handoff came back with a correction (2026-08-01)
+
+The synapify session implemented `update-homebrew` and **found the
+task file's `if:` guard wrong**. This entry originally recorded the
+guard as `if: github.event.release.prerelease != true`. That is a
+single signal and it is insufficient: a `workflow_dispatch` of an RC
+tag, or a prerelease created without the flag, would still dispatch
+and overwrite the stable cask. What shipped tests both:
+
+```yaml
+if: ${{ github.event.release.prerelease != true &&
+        !contains(github.event.release.tag_name || inputs.tag, '-rc.') }}
+```
+
+Spelled out rather than reusing an `env.IS_RC` helper because **the
+`env` context is not available in a job-level `if:`** — `env.IS_RC
+!= 'true'` evaluates `null != 'true'`, always true, and the guard is
+silently dead. Synapify's `notify-blog` already carried that
+reasoning; the task file should have been written from it instead of
+proposing a guard from first principles.
+
+Root cause of the miss: the guard was specified from what *this*
+repo needed (keep RCs out) without reading how the sending repo
+already expressed the same condition. **When a task file specifies a
+condition for another repo, quote that repo's existing equivalent
+rather than inventing one.**
+
+The same session also caught two stale instructions in synapify's
+`/ship` skill that would have made the job dead on arrival: it told
+every release to pass `--prerelease` (which would make the guard
+always reject), and to stamp `package.json` with `-beta` (which
+would produce `Synapify-<ver>-beta-arm64.dmg`, a filename the cask
+cannot fetch). Both are fixed there.
+
+### Known gap — the tap does not defend itself
+
+`update-synapify.yml` validates the incoming version against
+`^[0-9][0-9a-zA-Z.+-]*$`, which **accepts `1.0.0-rc.1`**. The regex
+exists to reject malformed and hostile input, not to make a channel
+decision, so the sender-side `if:` is currently the *only* thing
+keeping an RC out of the stable cask.
+
+That sits awkwardly beside this tap's own "whitelist rather than
+trust" ethos from the previous session. Hardening it — rejecting
+versions containing `-rc.`/`-beta` tap-side — is a deliberate
+change, not a bug fix, and is **not done**: it would need a decision
+about whether the tap should ever be able to serve a prerelease.
+Raised with Reid 2026-08-01; awaiting a call.
 - **/Applications/Synapify.app was hand-installed at 0.15.0-beta**
   and is now brew-managed at 0.17.0, with Reid's agreement. Settings
   under `~/Library/Application Support/Synapify` were untouched.
