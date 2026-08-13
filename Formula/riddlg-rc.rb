@@ -7,7 +7,7 @@
 class RiddlgRc < Formula
   desc "Release candidate of riddlg, the RIDDL generator"
   homepage "https://ossum.tech/riddl/tools/riddlg/"
-  version "1.0.0-rc.3"
+  version "1.0.0-rc.4"
   license :cannot_represent # proprietary; not open source
 
   # Not keg_only: a release candidate exists to be exercised as `riddlg`
@@ -18,12 +18,12 @@ class RiddlgRc < Formula
   # Native binary + a vendored libllama (in lib/, found via @rpath/$ORIGIN).
   if OS.mac? && Hardware::CPU.arm?
     url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Darwin-arm64.tar.gz"
-    sha256 "c382db59f4038277eefdf330f20dc4bafc4f5e486f147262efce04dbf78ff84a"
+    sha256 "7d357d9cd3fcbb94e7e05525e12ba9b76f1b7b56566bc11296579adee2a0e3e8"
     depends_on "libidn2"
     depends_on "openssl@3"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://storage.googleapis.com/synapify-releases/riddlg/#{version}/riddlg-#{version}-Linux-x86_64.tar.gz"
-    sha256 "f62e8e805c7c3cbce38bf806b7b53abed404becb69b31429de55db8f25f44a0a"
+    sha256 "3ba81e4ec29c9c43ca04c13ff047d074b1950f8252925fb77b7ba7a65ad9cf2b"
     depends_on "libidn2"
     depends_on "openssl@3"
   else
