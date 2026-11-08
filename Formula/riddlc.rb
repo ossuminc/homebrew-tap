@@ -18,7 +18,7 @@ class Riddlc < Formula
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
     sha256 "ca62b450e8129661a32ccb8b5a38cc3012c198ba34a4e3e93826dd9c65573222"
     depends_on "libidn2"
-    depends_on "openssl@3"
+    depends_on "openssl@4"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
     sha256 "a048cc7b4c680d8f91b26cdbce9b10ed26d9d2c87d21178ac6b82abdf22a5fbc"
