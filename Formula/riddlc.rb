@@ -6,7 +6,7 @@
 class Riddlc < Formula
   desc "Compiler for RIDDL (Reactive Interface to Domain Definition Language)"
   homepage "https://github.com/ossuminc/riddl"
-  version "2.5.0"
+  version "2.6.0"
   license "Apache-2.0"
 
   # riddlc and riddlc-rc are mutually exclusive rather than the RC being
@@ -16,17 +16,17 @@ class Riddlc < Formula
 
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
-    sha256 "ca62b450e8129661a32ccb8b5a38cc3012c198ba34a4e3e93826dd9c65573222"
+    sha256 "88c2f212d9230869b737c9edfd41e0cc7420a89039d40123504654358e1a5b77"
     depends_on "libidn2"
-    depends_on "openssl@4"
+    depends_on "openssl@3"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
-    sha256 "a048cc7b4c680d8f91b26cdbce9b10ed26d9d2c87d21178ac6b82abdf22a5fbc"
+    sha256 "e6b786737851527501e11c03052d6bbbef5735713795680be5c4e2f86e482010"
     depends_on "libidn2"
     depends_on "openssl@3"
   else
     url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
-    sha256 "9e8fb8b0725759c8e42ca518e3f3a8e769a397dc8caea5ab23abba29c0017843"
+    sha256 "0e034fa1e8dcdde69ae6a350b51677a65baa07831a59cb03284250c8a0daf2c1"
     depends_on "openjdk@21"
   end
 
