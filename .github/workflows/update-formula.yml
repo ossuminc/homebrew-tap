@@ -111,7 +111,7 @@ jobs:
 
               (bin/"riddlc").write <<~EOS
                 #!/bin/bash
-                export JAVA_HOME="#{Formula["openjdk@21"].opt_prefix}"
+                export JAVA_HOME="#{formula_opt_prefix("openjdk@21")}"
                 exec "#{libexec}/bin/riddlc" "$@"
               EOS
             end
