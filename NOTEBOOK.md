@@ -2,6 +2,98 @@
 
 Session log for the Ossum Inc Homebrew tap. Newest entry first.
 
+## Session 2026-11-07/11 — riddlc 2.5.0 linked openssl@4; audit made green
+
+Closed `task/2026-11-07-riddlc-2.5.0-macos-needs-openssl4.md` (from
+riddl). The 2.5.0 macOS binary linked `openssl@4` because riddl's Native
+link took whatever unversioned `libcrypto` the runner had. Hand-set the
+2.5.0 formula to `openssl@4` (`e86b68e`); 2.6.0 came out pinned to `@3`
+and the generator restored `@3` (`f5ec3ff`), as intended.
+
+**`otool -L` on the published zip is the ground truth for openssl.** The
+formula's `depends_on` is just what the generator assumes. Download the
+zip, check its sha256 against the formula, then `otool -L`.
+
+**Plain `brew deps <formula>` reports the INSTALLED keg's deps.** With
+2.0.0 installed it printed `openssl@3` for a formula declaring `@4`.
+`brew deps --direct` shows what the formula declares.
+
+**`brew style` and `brew audit` were already red.** Both came from
+Homebrew updating itself, not from any of our edits:
+- `Homebrew/FormulaPathMethods` (rubocop 1.92 via Homebrew 7.0.12) bans
+  `Formula["x"].opt_prefix`. Fixed with `formula_opt_prefix("x")` (`6613c10`).
+- Audit rejects an explicit `version` that the URL already implies. A
+  final tag scans correctly from the release URL; an RC tag does not
+  (`2.0.0-rc.26` reads as `64`, `86.64` or `2.0.0`, by `Version.parse`).
+  So the generator writes the tag literally into the URLs and deletes
+  `version` for `riddlc` only (`098d432`).
+
+**Test generator changes locally before trusting them.** Pull the
+"Generate formula" `run:` out of the YAML (`brew ruby` has `YAML`), run it
+with each formula's real tag and sha256s, and diff against
+`Formula/`. BSD `sed -i` needs a shim because the runner uses GNU sed.
+**Audit before pushing:** `git -C $(brew --repo ossuminc/tap) pull
+--ff-only <this repo> main` loads a local commit into the installed tap.
+
+## Session 2026-09-01 — task triage: a stale-drift report that fixed itself
+
+Closed `task/2026-08-18-riddlc-rc-formula-is-three-rcs-behind.md`
+(from riddl-examples) with **no formula changes**. It asked to bump
+`riddlc-rc` from rc.12 to rc.15. By the time it was read the tap was at
+**rc.26**, and `riddlc` had shipped stable **2.0.0** on 2026-08-27.
+Implementing the acceptance criterion literally would have pinned the
+formula *backwards* and recreated the bug it reported.
+
+Verified all four formulas against their real artifacts — ten sha256
+values, all matching. riddlc from `gh release download`, riddlg from the
+GCS bucket.
+
+### Root cause of the original drift, for the record
+
+`update-formula.yml` routes on `client_payload.formula` so a prerelease
+lands on `riddlc-rc` rather than overwriting stable `riddlc`. Dispatches
+predating that field defaulted to `riddlc`, so RC publications never
+reached the RC formula — that is why it sat at rc.12 across three
+releases. Fixed in `55230c9` / `c8a41ba`, which were already in flight
+when the task was filed. rc.16 → rc.26 → 2.0.0 all landed unattended
+since. The task's "worth considering: something that flags this" item
+needs nothing built.
+
+### The trap that bit this session — read the remote, not the tree
+
+The local checkout was **17 commits behind `origin/main`**, and its
+working tree still read `version "2.0.0-rc.12"` — the exact string the
+task complains about. Opening `Formula/riddlc-rc.rb` and believing it
+would have "confirmed" a two-week-dead report.
+
+It bit twice. A `ls Formula/` on the stale tree showed three formulas,
+and the conclusion drawn from it — "the tap has no `riddlg-rc`, worth a
+backlog item" — was wrong. `Formula/riddlg-rc.rb` exists on
+`origin/main` at `1.0.0-rc.4` (`445ac94`); `git pull` materialised it.
+`git show origin/main:<path>` was used for the version strings but the
+directory *listing* came from the stale tree, so the check was only half
+applied. **Enumerate with `git ls-tree origin/main`, never `ls`.**
+
+Same family as the CLAUDE.md search traps: absence looked like evidence.
+
+### riddlg's upstream is GCS, not GitHub Releases
+
+`gh release list -R ossuminc/riddl-gen` tops out at 0.5.0 while
+`riddlg.rb` says 0.6.0, which reads as the formula being *ahead* of
+upstream. It is not — riddlg ships from
+`storage.googleapis.com/synapify-releases/riddlg/`, same as the synapify
+cask and for the same private-repo reason recorded in the 2026-07-30
+entry. List real versions with:
+
+```bash
+curl -s "https://storage.googleapis.com/storage/v1/b/synapify-releases/o?prefix=riddlg/&delimiter=/&fields=prefixes"
+```
+
+Bucket holds 0.2.0–0.6.0 plus `1.0.0-rc.4`. Both riddlg formulas track
+the correct end of that split.
+
+---
+
 ## Session 2026-07-30 — synapify cask, the tap's first Cask
 
 Added `brew install --cask ossuminc/tap/synapify` for Synapify
