@@ -15,17 +15,17 @@ class RiddlcRc < Formula
   conflicts_with "riddlc", because: "both install a riddlc binary"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
+    url "https://github.com/ossuminc/riddl/releases/download/2.0.0-rc.26/riddlc-macos-arm64.zip"
     sha256 "e3101b255a0aa537bca23ecf1fe97fb37158846e5d32055fd073141b73938762"
     depends_on "libidn2"
     depends_on "openssl@3"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
+    url "https://github.com/ossuminc/riddl/releases/download/2.0.0-rc.26/riddlc-linux-x86_64.zip"
     sha256 "93bd13b2b9cf0c252cad4594830ee956510ec84b7c637238def2bc6781c4f00f"
     depends_on "libidn2"
     depends_on "openssl@3"
   else
-    url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
+    url "https://github.com/ossuminc/riddl/releases/download/2.0.0-rc.26/riddlc.zip"
     sha256 "54df7752b58924a9d5bca5f36db5dd9d0eb7bc3d0aa4d9b26c116c54ed7927c8"
     depends_on "openjdk@21"
   end

@@ -84,17 +84,17 @@ jobs:
           conflicts_with "${CONFLICTS}", because: "both install a riddlc binary"
 
           if OS.mac? && Hardware::CPU.arm?
-            url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-macos-arm64.zip"
+            url "https://github.com/ossuminc/riddl/releases/download/${TAG}/riddlc-macos-arm64.zip"
             sha256 "${SHA_MACOS_ARM64}"
             depends_on "libidn2"
             depends_on "openssl@3"
           elsif OS.linux? && Hardware::CPU.intel?
-            url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc-linux-x86_64.zip"
+            url "https://github.com/ossuminc/riddl/releases/download/${TAG}/riddlc-linux-x86_64.zip"
             sha256 "${SHA_LINUX_X86}"
             depends_on "libidn2"
             depends_on "openssl@3"
           else
-            url "https://github.com/ossuminc/riddl/releases/download/#{version}/riddlc.zip"
+            url "https://github.com/ossuminc/riddl/releases/download/${TAG}/riddlc.zip"
             sha256 "${SHA_JVM}"
             depends_on "openjdk@21"
           end
@@ -148,6 +148,14 @@ jobs:
           end
         end
         FORMULA_TEMPLATE
+
+        # Homebrew scans a final tag (2.6.0) correctly from the URLs, and
+        # `brew audit` then rejects an explicit `version` as redundant. An
+        # RC tag scans wrongly (2.0.0-rc.26 reads as 64, 86.64 or 2.0.0
+        # depending on the URL), so riddlc-rc must keep its `version`.
+        if [ "${FORMULA}" = "riddlc" ]; then
+          sed -i '/^  version "/d' "Formula/${FORMULA}.rb"
+        fi
 
     - name: Commit and push formula
       env:
