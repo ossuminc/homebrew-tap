@@ -14,18 +14,18 @@ class Riddlc < Formula
   conflicts_with "riddlc-rc", because: "both install a riddlc binary"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/ossuminc/riddl/releases/download/2.8.0/riddlc-macos-arm64.zip"
-    sha256 "e341ecbe30590b4f5d614e3cf77e04f6fb73206686498ab691659a5653e18d04"
+    url "https://github.com/ossuminc/riddl/releases/download/2.8.1/riddlc-macos-arm64.zip"
+    sha256 "e71869201aefbf3ee862aae1704c53536f188ae6d316f32dac73e6b81bce2e67"
     depends_on "libidn2"
     depends_on "openssl@3"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/ossuminc/riddl/releases/download/2.8.0/riddlc-linux-x86_64.zip"
-    sha256 "7917abf4bb2bc2a229118d16a202c06a90cdc0094d4a7225b7bcc54a62157ca2"
+    url "https://github.com/ossuminc/riddl/releases/download/2.8.1/riddlc-linux-x86_64.zip"
+    sha256 "530303805a3b119911e6d28cce2dadb1286ce561c5086d39672b2e18623d7a4a"
     depends_on "libidn2"
     depends_on "openssl@3"
   else
-    url "https://github.com/ossuminc/riddl/releases/download/2.8.0/riddlc.zip"
-    sha256 "93247c5f09cb5acaa01b20a1fc3b5e51eaad2b69497172def21570137f88de1a"
+    url "https://github.com/ossuminc/riddl/releases/download/2.8.1/riddlc.zip"
+    sha256 "11fbf6a0349dba3c9de19b258c7f674cf2a86a3bf40d767e9d4e2a58e82df593"
     depends_on "openjdk@21"
   end
 
